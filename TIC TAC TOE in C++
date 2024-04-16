@@ -1,0 +1,124 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+vector<int> checkList = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+char i = '|';
+vector<char> change = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+
+
+void display()
+{
+    cout << "                                       |            |     |         " << std::endl;
+    cout << "                " << i << "     " << i << "                        |         7  |  8  |  9" << std::endl;
+    cout << "             " << change[6] << "  " << i << "  " << change[7] << "  " << i << "  " << change[8] << "                |       __|_|__" << std::endl;
+    cout << "           __" << i << "_" << i << "__               |            |     |  " << std::endl;
+    cout << "                " << i << "     " << i << "                        |         4  |  5  |  6" << std::endl;
+    cout << "             " << change[3] << "  " << i << "  " << change[4] << "  " << i << "  " << change[5] << "                |       __|_|__" << std::endl;
+    cout << "           __" << i << "_" << i << "__               |            |     |  " << std::endl;
+    cout << "                " << i << "     " << i << "                        |         1  |  2  |  3" << std::endl;
+    cout << "             " << change[0] << "  " << i << "  " << change[1] << "  " << i << "  " << change[2] << "                |            |     |         " << std::endl;
+    cout << "                " << i << "     " << i << "                        |         " << std::endl;
+}
+
+
+void player(int count, int num)
+{
+    // Player1's turn
+    if (count % 2 == 0)
+    {
+        change[num - 1] = 'x';
+        display();
+    }
+    else
+    { // Player2's turn
+        change[num - 1] = 'o';
+        display();
+    }
+}
+
+// Function to check row winners
+bool checkRow()
+{
+    if (change[0] == change[1] && change[1] == change[2] && change[0] != ' ')
+        return true;
+    else if (change[3] == change[4] && change[4] == change[5] && change[3] != ' ')
+        return true;
+    else if (change[6] == change[7] && change[7] == change[8] && change[6] != ' ')
+        return true;
+    else
+        return false;
+}
+
+// Function to check column winners
+bool checkColumn()
+{
+    if (change[0] == change[3] && change[3] == change[6] && change[0] != ' ')
+        return true;
+    else if (change[1] == change[4] && change[4] == change[7] && change[1] != ' ')
+        return true;
+    else if (change[2] == change[5] && change[5] == change[8] && change[2] != ' ')
+        return true;
+    else
+        return false;
+}
+
+// Function to check diagonal winners
+bool checkDiagonals()
+{
+    if (change[0] == change[4] && change[4] == change[8] && change[0] != ' ')
+        return true;
+    else if (change[2] == change[4] && change[4] == change[6] && change[2] != ' ')
+        return true;
+    else
+        return false;
+}
+
+// Function to check winners
+bool gameWinner()
+{
+    return (checkRow() || checkColumn() || checkDiagonals());
+}
+
+int main()
+{
+    int count = 0;
+    display();
+
+    while (checkList.size() > 0)
+    {
+        int num;
+        cout << "Please select one no. (1-9): ";
+        cin >> num;
+
+        auto it = find(checkList.begin(), checkList.end(), num);
+        if (it != checkList.end())
+        {
+            player(count, num);
+            count++;
+            checkList.erase(it);
+        }
+        else
+        {
+            cout << "\nInvalid Input!\n";
+        }
+
+        if (gameWinner())
+        {
+            if (count % 2 == 0)
+                cout << "Player 'o' Wins " << endl;
+            else
+                cout << "Player 'x' Wins " << endl;
+            break;
+        }
+    }
+
+    if (checkList.empty())
+    {
+        cout << "Match Draw !" << endl;
+    }
+
+    return 0;
+}
+
