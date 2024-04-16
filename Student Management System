@@ -1,0 +1,209 @@
+#include<bits/stdc++.h>
+using namespace std;
+vector<string>rollno(100),name(100),Class(100),mobno(100),admyear(100);
+//arrays for storing students data
+int total=0;
+void enter()
+{
+int ch=0;
+cout<<"How many students do u want to enter??"<<endl;
+cin>>ch;
+if(total==0)
+{
+total=ch+total;
+for(int i=0;i<ch;i++)
+{
+cout<<"\nEnter the Data of student "<<i+1<<endl<<endl;
+cout<<"Enter Roll NO:: "<<endl;
+cin>>rollno[i];
+cout<<"Enter Name: "<<endl;
+cin>>name[i];
+cout<<"Enter Class: "<<endl;
+cin>>Class[i];
+cout<<"Enter Mobile NO: "<<endl;
+cin>>mobno[i];
+cout<<"Enter Admission Year: "<<endl;
+cin>>admyear[i];
+}
+}
+else
+{
+for(int i=total;i<ch+total;i++)
+//to store onward students data rather than storing double data()
+{
+cout<<"\nEnter the Data of student "<<i+1<<endl<<endl;
+cout<<"Enter Roll NO ";
+cin>>rollno[i];
+cout<<"Enter Name: ";
+cin>>name[i];
+cout<<"Enter Class: ";
+cin>>Class[i];
+cout<<"Enter Mobile NO: ";
+cin>>mobno[i];
+cout<<"Enter Admission Year: ";
+cin>>admyear[i];
+}
+total=ch+total; //making choice
+}
+}
+void show()
+{
+if(total==0)
+{
+cout<<"No Data is Entered"<<endl;
+}
+else
+{
+for(int i=0;i<total;i++)
+{
+cout<<"\nData of Student "<<i+1<<endl<<endl;
+cout<<"Roll NO "<<rollno[i]<<endl;
+cout<<"Name "<<name[i]<<endl;
+cout<<"Class "<<Class[i]<<endl;
+cout<<"Mobile NO "<<mobno[i]<<endl;
+cout<<"Admission Year "<<admyear[i]<<endl;
+}
+}
+}
+void search()
+{
+if(total==0)
+{
+cout<<"No data is entered"<<endl;
+}
+else
+{
+string roll;
+cout<<"Enter the roll no of student"<<endl;
+cin>>roll;
+for(int i=0;i<total;i++)
+{
+if(roll==rollno[i])
+{
+cout<<"Roll NO "<<rollno[i]<<endl;
+cout<<"Name "<<name[i]<<endl;
+cout<<"Class "<<Class[i]<<endl;
+cout<<"Mobile NO "<<mobno[i]<<endl;
+cout<<"Admission Year "<<admyear[i]<<endl;
+}
+}
+}
+}
+void update()
+{
+if(total==0)
+{
+cout<<"No data is entered"<<endl;
+}
+else{
+string roll;
+cout<<"Enter the roll no of student which you want to update"<<endl;
+cin>>roll;
+for(int i=0;i<total;i++)
+{
+if(roll==rollno[i])
+{
+cout<<"\nPrevious data"<<endl<<endl;
+cout<<"Data of Student "<<i+1<<endl;
+cout<<"Roll NO: "<<rollno[i]<<endl;
+cout<<"Name "<<name[i]<<endl;
+cout<<"Class "<<Class[i]<<endl;
+cout<<"Mobile NO "<<mobno[i]<<endl;
+cout<<"Admission Year "<<admyear[i]<<endl;
+cout<<"\nEnter new data"<<endl<<endl;
+cout<<"Enter Roll NO ";
+cin>>rollno[i];
+cout<<"Enter Name: ";
+cin>>name[i];
+cout<<"Enter Class: ";
+cin>>Class[i];
+cout<<"Enter Mobile NO: ";
+cin>>mobno[i];
+cout<<"Enter Admission Year: ";
+cin>>admyear[i];
+}
+}
+}
+}
+void Delete()
+{
+if(total==0)
+{
+cout<<"No data is entered yet"<<endl;
+}
+else
+{
+string roll;
+cout<<"Enter the roll no of student which you want to delete"<<endl;
+cin>>roll; 
+for(int i=0;i<total;i++)
+{
+if(roll==rollno[i])
+{ rollno.erase(rollno.begin()+i);
+  name.erase(name.begin()+i);
+  Class.erase(Class.begin()+i);
+  mobno.erase(mobno.begin()+i);
+  admyear.erase(admyear.begin()+i); 
+  i--;
+}
+}
+}
+}
+void DeleteAll(){
+int a;
+cout<<"Are you Sure to Delete Data?"<<endl;
+cout<<"Press 1 to delete all record"<<endl;
+cin>>a;
+if(a==1)
+{
+total=0;
+cout<<"All record is deleted..!!"<<endl;
+}
+else
+{
+cout<<"Please Press 1 to Delete All Record"<<endl;
+}
+}
+int main() //main function, execution of program starts from here
+{
+int value;
+while(true) //always in Loop
+{
+cout<<"\nPress 1 to Enter data"<<endl<<endl;
+cout<<"Press 2 to Show data"<<endl<<endl;
+cout<<"Press 3 to Search data"<<endl<<endl;
+cout<<"Press 4 to Update data"<<endl<<endl;
+cout<<"Press 5 to Delete a particular data"<<endl<<endl;
+cout<<"Press 6 to delete entire data"<<endl<<endl;
+cout<<"Press 7 to Quit"<<endl<<endl;
+cin>>value;
+switch(value)
+{
+case 1:
+enter();
+break;
+case 2:
+show();
+break;
+case 3:
+search();
+break;
+case 4:
+update();
+break;
+case 5:
+Delete();
+break;
+case 6:
+DeleteAll();
+break;
+case 7:
+exit(0);
+break;
+default:
+cout<<"Invalid input"<<endl;
+break;
+}
+}
+}
+
