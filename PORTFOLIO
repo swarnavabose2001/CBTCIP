@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        .upload-button {
+              background-color: #4CAF50;
+              color: #fff;
+              padding: 10px 20px;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+}
+       .upload-button:hover {
+              background-color: #3e8e41;
+}
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+       .container {
+            max-width: 800px;
+            margin: 40px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+       .box {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: calc(33.33% - 40px);
+        }
+       .box h2 {
+            margin-top: 0;
+        }
+       .box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+       .box ul li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+       .box ul li:last-child {
+            border-bottom: none;
+        }
+       .box.icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        @media (max-width: 600px) {
+           .box {
+                width: calc(50% - 40px);
+            }
+        }
+        @media (max-width: 400px) {
+           .box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img id="profile-image" src="" alt="Profile Image">
+        <input type="file" id="image-upload" style="display: none;">
+        <label for="image-upload" class="upload-button">Upload Image</label>
+    </div>
+    <div class="container">
+        <div class="box">
+            <h2>About Me</h2>
+            <p><b>NAME:</b> John Doe</p>
+            <p><b>Father's Name:</b> Ben Doe</p>
+            <p><b>Address:</b> Ayodhya, India</p>
+            <p><b>DOB:</b>13 Sept 2000</p>
+            <p><i class="fas fa-envelope"></i>johndoe@example.com</p>
+            <p><i class="fas fa-phone"></i> 123-456-7890</p>
+            <p><b>Professional summary:</b>I am a quick learner with excellent soft skills and leadership ability. With training and guidance, I can easily convert my weakness to strength and go from novice to expert level</p>
+        </div>
+        <div class="box">
+            <h2>Experience</h2>
+            <ul>
+                <li>
+                    <h3>Software Engineer, ABC Company</h3>
+                    <p>2018-2020</p>
+                    <p>Developed multiple web applications using JavaScript, HTML, and CSS.</p>
+                </li>
+                <li>
+                    <h3>Intern, DEF Company</h3>
+                    <p>Summer 2017</p>
+                    <p>Assisted in the development of a mobile app using React Native.</p>
+                </li>
+            </ul>
+        </div>
+        <div class="box">
+            <h2>Education</h2>
+            <ul>
+                <li>
+                    <h3>Bachelor of Science in Computer Science, XYZ University</h3>
+                    <p>2016-2020</p>
+                    <p>Courses: Data Structures, Algorithms, Computer Systems, and Web Development.</p>
+                </li>
+            </ul>
+        </div>
+        <div class="box">
+            <h2>Skills</h2>
+            <ul>
+                <li>
+                    <i class="fas fa-html5"></i> HTML5
+                </li>
+                <li>
+                    <i class="fas fa-css3"></i> CSS3
+                </li>
+                <li>
+                    <i class="fas fa-js"></i> JavaScript
+                </li>
+                <li>
+                    <i class="fas fa-react"></i> React
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>const imageUpload = document.getElementById('image-upload');
+const profileImage = document.getElementById('profile-image');
+
+imageUpload.addEventListener('change', (e) => {
+    const file = imageUpload.files[0];
+    const reader = new FileReader();
+    reader.onload = (event) => {
+        profileImage.src = event.target.result;
+    };
+    reader.readAsDataURL(file);});</script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</body>
+</html>
