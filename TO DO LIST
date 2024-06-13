@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO DO LIST</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+       .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+       .todo-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+       .todo-list li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+       .todo-list li:last-child {
+            border-bottom: none;
+        }
+       .todo-list li input[type="checkbox"] {
+            margin-right: 10px;
+        }
+       .completed-tasks {
+            margin-top: 20px;
+        }
+       .completed-tasks li {
+            text-decoration: line-through;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TO DO LIST</h1>
+        <input type="text" id="new-task" placeholder="Add new task">
+        <button id="add-task">Add</button>
+        <ul class="todo-list" id="todo-list">
+            <!-- tasks will be rendered here -->
+        </ul>
+        <h2>Completed Tasks</h2>
+        <ul class="todo-list completed-tasks" id="completed-tasks">
+            <!-- completed tasks will be rendered here -->
+        </ul>
+    </div>
+
+    <script>
+        const todoList = document.getElementById('todo-list');
+        const completedTasks = document.getElementById('completed-tasks');
+        const newTaskInput = document.getElementById('new-task');
+        const addTaskButton = document.getElementById('add-task');
+
+        let tasks = [];
+
+        addTaskButton.addEventListener('click', () => {
+            const task = newTaskInput.value.trim();
+            if (task) {
+                tasks.push({ text: task, completed: false });
+                newTaskInput.value = '';
+                renderTasks();
+            }
+        });
+
+        todoList.addEventListener('click', (e) => {
+            if (e.target.type === 'checkbox') {
+                const taskIndex = tasks.findIndex((task) => task.text === e.target.nextElementSibling.textContent);
+                tasks[taskIndex].completed = e.target.checked;
+                renderTasks();
+            }
+        });
+
+        function renderTasks() {
+            todoList.innerHTML = '';
+            completedTasks.innerHTML = '';
+            tasks.forEach((task) => {
+                const taskElement = document.createElement('li');
+                taskElement.innerHTML = `
+                    <input type="checkbox" ${task.completed? 'checked' : ''}>
+                    <span>${task.text}</span>
+                `;
+                if (task.completed) {
+                    completedTasks.appendChild(taskElement);
+                } else {
+                    todoList.appendChild(taskElement);
+                }
+            });
+        }
+
+        renderTasks();
+    </script>
+</body>
+</html>
